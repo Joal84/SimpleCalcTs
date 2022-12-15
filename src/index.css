@@ -1,0 +1,15 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body,
+html {
+  font-size: 62.5%;
+  overflow: hidden;
+  margin: 0;
+}
