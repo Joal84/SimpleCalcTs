@@ -6,9 +6,7 @@ export const formatOperand = (operand: string | number) => {
   if (operand == null) return;
   if (typeof operand === "string") {
     const [integer, decimal] = operand.split(".");
-    if (typeof integer === "number") {
-      if (decimal == null) return INTEGER_FORMATER.format(BigInt(integer));
-      return `${INTEGER_FORMATER.format(integer)}.${decimal}`;
-    }
+    if (decimal == null) return INTEGER_FORMATER.format(BigInt(integer));
+    return `${INTEGER_FORMATER.format(BigInt(integer))}.${decimal}`;
   }
 };
