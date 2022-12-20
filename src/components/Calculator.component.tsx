@@ -2,6 +2,7 @@ import { useReducer, useEffect } from "react";
 import "./calculator.css";
 import DigitButton from "./DigitButton.component";
 import OperationButton from "./OperationButton.component";
+import { formatOperand } from "../utils/formater";
 
 export enum ACTIONS {
   ADD_DIGIT = "add-digit",
@@ -137,17 +138,6 @@ const reducer = (state: State, { type, payload }: allActions): State => {
   }
 };
 
-const INTEGER_FORMATER = new Intl.NumberFormat("pt-PT", {
-  maximumFractionDigits: 0,
-});
-
-const formatOperand = (operand: string) => {
-  if (operand == null) return;
-  const [integer, decimal] = operand.split(".");
-  if (decimal == null) return INTEGER_FORMATER.format(BigInt(integer));
-  return `${INTEGER_FORMATER.format(integer)}.${decimal}`;
-};
-
 const evaluate = ({
   currentOperand,
   previousOperand,
@@ -183,7 +173,11 @@ const evaluate = ({
   }
 };
 
-const Calculator = ({ setCopy }: { setCopy: (value: any) => void }) => {
+const Calculator = ({
+  setCopy,
+}: {
+  setCopy: (value: string | undefined) => void;
+}) => {
   const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(
     reducer,
     initState
